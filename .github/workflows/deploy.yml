@@ -1,4 +1,4 @@
-name: Deploy Static Site
+name: Deploy Static Site with Linting
 
 on:
   push:
@@ -6,20 +6,57 @@ on:
       - main
 
 jobs:
-  deploy:
+  lint-and-deploy:
     runs-on: ubuntu-latest
-
+    
+    permissions:
+      contents: write
+      
     steps:
-    - name: Checkout main branch
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Deploy to gh-pages branch
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./  # current directory or specify build folder
-        publish_branch: gh-pages
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
+      # Step 1: Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        
+      # Step 2: Setup Node.js for ESLint
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      # Step 3: Install ESLint
+      - name: Install ESLint
+        run: |
+          npm init -y
+          npm install eslint --save-dev
+          
+      # Step 4: Create ESLint config
+      - name: Create ESLint Config
+        run: |
+          echo '{
+            "env": {
+              "browser": true,
+              "es2021": true
+            },
+            "extends": "eslint:recommended",
+            "parserOptions": {
+              "ecmaVersion": 12
+            },
+            "rules": {
+              "semi": ["error", "always"],
+              "no-unused-vars": "error",
+              "quotes": ["error", "single"]
+            }
+          }' > .eslintrc.json
+          
+      # Step 5: Run ESLint (will fail if errors found)
+      - name: Run ESLint
+        run: npx eslint script.js
+        continue-on-error: false
+        
+      # Step 6: Deploy to GitHub Pages (only runs if linting passes)
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: '.github,node_modules,.eslintrc.json,package*.json'
