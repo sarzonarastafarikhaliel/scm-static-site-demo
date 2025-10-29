@@ -1,0 +1,12 @@
+{
+  "name": "scm-static-site",
+  "version": "1.0.0",
+  "description": "Software Configuration Management Project with GitHub Actions",
+  "scripts": {
+    "lint": "eslint script.js",
+    "lint:fix": "eslint script.js --fix"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0"
+  }
+}
