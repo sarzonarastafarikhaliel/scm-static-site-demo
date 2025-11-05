@@ -32,7 +32,7 @@ const colors =     ['#E27D60', '#85DCB3', '#E8A87C', '#C38D9E', '#41B3A3']
         container.remove();
     }, 4500);
 }
-
+//
 // Fixed version
 document.addEventListener('DOMContentLoaded', function() {
     const deployInfo = document.getElementById('deployment-info');
@@ -55,3 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+if (typeof module !== 'undefined') {
+  module.exports = { startConfetti };
+}
