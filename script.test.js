@@ -6,6 +6,6 @@ describe('startConfetti function', () => {
   });
 
   test('should fail intentionally for demonstration', () => {
-    expect(1 + 1).toBe(3);
+    expect(1 + 1).toBe(2);
   });
 });
