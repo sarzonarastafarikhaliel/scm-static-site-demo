@@ -5,7 +5,8 @@ describe('startConfetti function', () => {
     expect(typeof startConfetti).toBe('function');
   });
 
-  test('should fail intentionally for demonstration', () => {
+  // Fixed version: passing test
+  test('should correctly calculate 1 + 1', () => {
     expect(1 + 1).toBe(2);
   });
 });
