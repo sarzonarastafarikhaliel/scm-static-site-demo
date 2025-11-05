@@ -9,7 +9,7 @@ function startConfetti() {
     container.style.pointerEvents = 'none';
     document.body.appendChild(container);
 
-const colors =     ['#E27D60', '#85DCB3', '#E8A87C', '#C38D9E', '#41B3A3']
+const colors =     ['#E27D60', '#85DCB3', '#E8A87C', '#C38D9E', '#41B3A3'];
     for (let i = 0; i < 80; i++) {
         const confetti = document.createElement('div');
         confetti.style.position = 'absolute';
