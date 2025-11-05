@@ -4,9 +4,11 @@
   "description": "Software Configuration Management Project with GitHub Actions",
   "scripts": {
     "lint": "eslint script.js",
-    "lint:fix": "eslint script.js --fix"
+    "lint:fix": "eslint script.js --fix",
+    "test": "jest"
   },
   "devDependencies": {
-    "eslint": "^8.50.0"
+    "eslint": "^8.50.0",
+    "jest": "^29.7.0"
   }
 }
